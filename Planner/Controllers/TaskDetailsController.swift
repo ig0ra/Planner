@@ -14,6 +14,8 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     let dateFormatter = DateFormatter()
     
+    var delegate: ActionResultDelegate!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }

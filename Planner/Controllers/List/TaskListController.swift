@@ -10,14 +10,6 @@ import UIKit
 import CoreData
 
 class TaskListController: UITableViewController, ActionResultDelegate {
-    func done(source: UIViewController, data: Any?) {
-        <#code#>
-    }
-    
-    func cancel(source: UIViewController, data: Any?) {
-        <#code#>
-    }
-    
     
     var taskList:[Task]!
     
@@ -203,5 +195,18 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             return
         }
     }
+    
+    //    Mark: ActionResultDelegate
+    
+    func done(source: UIViewController, data: Any?) {
+        if source is TaskDetailsController {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow{
+                taskDao.save()
+                tableView.reloadRows(at: [selectedIndexPath], with: .fade)
+            }
+        }
+    }
+    
+
 
 }
