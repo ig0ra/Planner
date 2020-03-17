@@ -15,7 +15,9 @@ class PriorityDaoDbImpl: Crud {
     typealias Item = Priority
     
     static let current = PriorityDaoDbImpl()
-    private init(){}
+    private init(){
+        items = getAll()
+    }
     
     var items: [Item]!
     

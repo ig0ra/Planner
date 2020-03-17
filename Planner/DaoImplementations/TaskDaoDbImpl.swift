@@ -14,8 +14,14 @@ import CoreData
 class TaskDaoDbImpl: Crud {
     typealias Item = Task
     
+    let categoryDao = CategoryDaoDbImpl.current
+    let priorityDao = PriorityDaoDbImpl.current
+    
+    
     static let current = TaskDaoDbImpl()
-    private init(){}
+    private init(){
+        
+    }
     
     var items: [Item]!
     

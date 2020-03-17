@@ -15,7 +15,9 @@ class CategoryDaoDbImpl: Crud {
     typealias Item = Category
     
     static let current = CategoryDaoDbImpl()
-    private init(){}
+    private init(){
+        items = getAll()
+    }
     
     var items: [Item]!
     

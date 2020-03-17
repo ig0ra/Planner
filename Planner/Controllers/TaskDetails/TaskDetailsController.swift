@@ -9,12 +9,41 @@
 import UIKit
 
 class TaskDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
     
-    var task:Task! //task for editing 
+    
+    var task:Task! //task for editing
+    
+    var taskName:String?
+    var taskInfo:String?
+    var taskPriority:Priority?
+    var taskCategory:Category?
+    var taskDeadline:Date?
     
     let dateFormatter = DateFormatter()
     
     var delegate: ActionResultDelegate!
+    
+    var textTaskName:UITextField!
+    var textviewTaskInfo:UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        
+        if let task = task{ // если объект не пустой (значит режим редактирования, а не создания новой задачи)
+            taskName = task.name
+            taskInfo = task.info
+            taskPriority = task.priority
+            taskCategory = task.category
+            taskDeadline = task.deadline
+        }
+    }
+    
+    //    Mark: TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -47,7 +76,9 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             // заполняем компонент данными из задачи
-            cell.textTaskName.text = task.name
+            cell.textTaskName.text = taskName
+            
+            textTaskName = cell.textTaskName
             
             return cell
             
@@ -62,7 +93,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             // будет хранить конечный текст для отображения
             var value:String
             
-            if let name = task.category?.name{
+            if let name = taskCategory?.name{
                 value = name
             }else{
                 value = "Not selected"
@@ -85,7 +116,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             var value:String
             
-            if let name = task.priority?.name{
+            if let name = taskPriority?.name{
                 value = name
             }else{
                 value = "Not selected"
@@ -106,7 +137,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             var value:String
             
-            if let deadline = task.deadline{
+            if let deadline = taskDeadline{
                 value = dateFormatter.string(from: deadline)
             }else{
                 value = "Not specified"
@@ -125,7 +156,9 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             // заполняем компонент данными из задачи
-            cell.textTaskInfo.text = task.info
+            cell.textTaskInfo.text = taskInfo
+            
+            textviewTaskInfo = cell.textTaskInfo
             
             return cell
             
@@ -151,12 +184,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
-    }
     
     //    Mark: IBActions
     
@@ -165,6 +193,13 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.popViewController(animated: true)
     }
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
+        task.name = textTaskName.text
+        task.info = textviewTaskInfo.text
+        
+        delegate.done(source: self, data: nil)
+        
+        navigationController?.popViewController(animated: true)
+        
     }
     
     /*
@@ -176,5 +211,22 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //    Mark: Prepare
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == nil {
+            return
+        }
+        
+        switch segue.identifier {
+        case "SelectCategory":
+            if let controller = segue.destination as? CategoryListController{
+                controller.selectedCategory = taskCategory
+            }
+        default:
+            return
+        }
+        
+    }
 
 }
