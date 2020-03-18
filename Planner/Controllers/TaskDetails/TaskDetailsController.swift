@@ -223,6 +223,11 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             if let controller = segue.destination as? CategoryListController{
                 controller.selectedCategory = taskCategory
             }
+        case "SelectPriority":
+            if let controller = segue.destination as? PriorityListController{
+                controller.selectedPriority = taskPriority
+            }
+        
         default:
             return
         }

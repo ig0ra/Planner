@@ -1,5 +1,5 @@
 //
-//  CategoryListCell.swift
+//  PriorityListCell.swift
 //  Planner
 //
 //  Created by Igor O on 18.03.20.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class CategoryListCell: UITableViewCell {
-    @IBOutlet weak var labelCategoryName: UILabel!
-    @IBOutlet weak var buttonCheckCategory: UIButton!
+class PriorityListCell: UITableViewCell {
+    @IBOutlet weak var labelPriorityName: UILabel!
     
+    @IBOutlet weak var buttonCheckPriority: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
