@@ -8,29 +8,36 @@
 
 import UIKit
 
-class CategoryListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
+    @IBOutlet weak var tableView: UITableView!
     
-    let categoryDao = CategoryDaoDbImpl.current
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dictTableView = tableView
+        dao = CategoryDaoDbImpl.current
+        
+        // Do any additional setup after loading the view.
+    }
     
-    var selectedCategory:Category!
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryDao.items.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory", for: indexPath) as? CategoryListCell else {
             fatalError("error with cell")
+            
         }
         
-        let category = categoryDao.items[indexPath.row]
+        cell.selectionStyle = .none
         
-        if selectedCategory != nil && selectedCategory == category{
+        let category = dao.items[indexPath.row]
+        
+        if selectedItem != nil && selectedItem == category{
             cell.buttonCheckCategory.setImage(UIImage(named: "check_green"), for: .normal)
+            currentCheckedIndexPath = indexPath
         } else {
             cell.buttonCheckCategory.setImage(UIImage(named: "check_gray"), for: .normal)
         }
@@ -42,21 +49,23 @@ class CategoryListController: UIViewController, UITableViewDelegate, UITableView
     }
     
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    
+
+    @IBAction func tapCheckCategory(_ sender: UIButton) {
+        checkItem(sender)
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: IBActions
+    
+    @IBAction func tapCancel(_ sender: UIBarButtonItem) {
+        cancel()
     }
-    */
+    
+    @IBAction func tapSave(_ sender: UIBarButtonItem) {
+        save()
+    }
+    
 
 }

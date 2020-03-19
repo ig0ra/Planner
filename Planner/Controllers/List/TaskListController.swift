@@ -31,12 +31,6 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         }
     
     
-
-    
-    
-    
-    
-    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -8,27 +8,33 @@
 
 import UIKit
 
-class PriorityListController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PriorityListController: DictionaryController<PriorityDaoDbImpl> {
+    @IBOutlet weak var tableView: UITableView!
     
-    let priorityDAO = PriorityDaoDbImpl.current
-    
-    var selectedPriority:Priority!
-    
-    //    Mark: TableView
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return priorityDAO.items.count
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dictTableView = tableView
+        dao = PriorityDaoDbImpl.current
+        
+        // Do any additional setup after loading the view.
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //    Mark: TableView
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellPriority", for: indexPath) as? PriorityListCell else{
             fatalError("fatal error with cell")
         }
         
-        let priority = priorityDAO.items[indexPath.row]
+        cell.selectionStyle = .none
         
-        if selectedPriority != nil && selectedPriority == priority{
+        let priority = dao.items[indexPath.row]
+        
+        if selectedItem != nil && selectedItem == priority{
             cell.buttonCheckPriority.setImage(UIImage(named: "check_green"), for: .normal)
+            
+            currentCheckedIndexPath = indexPath
         } else {
             cell.buttonCheckPriority.setImage(UIImage(named: "check_gray"), for: .normal)
         }
@@ -39,11 +45,7 @@ class PriorityListController: UIViewController, UITableViewDataSource, UITableVi
     }
     
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
     
 
     /*
@@ -55,5 +57,20 @@ class PriorityListController: UIViewController, UITableViewDataSource, UITableVi
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    
+    @IBAction func tapCheckPriority(_ sender: UIButton) {
+        checkItem(sender)
+        
+    }
+    
+    
+    //    MARK: IBActions
+    @IBAction func tapCancel(_ sender: UIBarButtonItem) {
+        cancel()
+    }
+    
+    @IBAction func tapSave(_ sender: UIBarButtonItem) {
+        save()
+    }
 }

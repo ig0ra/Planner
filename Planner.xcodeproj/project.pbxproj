@@ -18,6 +18,7 @@
 		985E5E1F241C18E100DDFC32 /* TaskPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E5E1E241C18E100DDFC32 /* TaskPriorityCell.swift */; };
 		985E5E21241C192500DDFC32 /* TaskDeadlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E5E20241C192500DDFC32 /* TaskDeadlineCell.swift */; };
 		985E5E23241C195800DDFC32 /* TaskInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E5E22241C195800DDFC32 /* TaskInfoCell.swift */; };
+		9868EA3E2423C79300E52910 /* DictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868EA3D2423C79300E52910 /* DictionaryController.swift */; };
 		988C2A80241D8206005F7223 /* ActionResultDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988C2A7F241D8206005F7223 /* ActionResultDelegate.swift */; };
 		988F63572419255400A20F4E /* TaskListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984642802416BE7F00DA7637 /* TaskListController.swift */; };
 		989160802422578700AD572C /* PriorityListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9891607F2422578700AD572C /* PriorityListController.swift */; };
@@ -49,6 +50,7 @@
 		985E5E1E241C18E100DDFC32 /* TaskPriorityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPriorityCell.swift; sourceTree = "<group>"; };
 		985E5E20241C192500DDFC32 /* TaskDeadlineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDeadlineCell.swift; sourceTree = "<group>"; };
 		985E5E22241C195800DDFC32 /* TaskInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoCell.swift; sourceTree = "<group>"; };
+		9868EA3D2423C79300E52910 /* DictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryController.swift; sourceTree = "<group>"; };
 		988C2A7F241D8206005F7223 /* ActionResultDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionResultDelegate.swift; sourceTree = "<group>"; };
 		9891607F2422578700AD572C /* PriorityListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListController.swift; sourceTree = "<group>"; };
 		989160812422583F00AD572C /* PriorityListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListCell.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		9846427D2416BDEA00DA7637 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				9868EA3D2423C79300E52910 /* DictionaryController.swift */,
 				984642802416BE7F00DA7637 /* TaskListController.swift */,
 				9897DCC324213AF1009108E9 /* CategoryListController.swift */,
 				9891607F2422578700AD572C /* PriorityListController.swift */,
@@ -290,6 +293,7 @@
 				985E5E1B241C15CF00DDFC32 /* TaskNameCell.swift in Sources */,
 				9891608424225D2E00AD572C /* CategoryListCell.swift in Sources */,
 				98BA8579241A816900DF3367 /* DateExtension.swift in Sources */,
+				9868EA3E2423C79300E52910 /* DictionaryController.swift in Sources */,
 				98BA8580241A81DF00DF3367 /* Crud.swift in Sources */,
 				989160822422583F00AD572C /* PriorityListCell.swift in Sources */,
 				9897DCC424213AF1009108E9 /* CategoryListController.swift in Sources */,

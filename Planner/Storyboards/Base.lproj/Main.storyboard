@@ -113,6 +113,9 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YFn-Vr-O6a"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KxT-2h-glv"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Zql-ce-eCW" id="RDr-Ef-4YO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1y6-dS-SHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,6 +145,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="taskNameChanged:" destination="zUi-2i-b5j" eventType="editingChanged" id="BTx-ws-eyx"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -305,6 +311,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Ayg-me-MJm" id="S1P-LA-ATu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kV9-g2-eq5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -329,7 +338,7 @@
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="133.5832083958021"/>
         </scene>
-        <!--Priority List Controller-->
+        <!--Title-->
         <scene sceneID="gIG-jx-v5O">
             <objects>
                 <viewController id="eDH-95-vEw" customClass="PriorityListController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
@@ -361,6 +370,9 @@
                                                         <constraint firstAttribute="width" constant="25" id="xPk-YH-Ybh"/>
                                                     </constraints>
                                                     <state key="normal" image="check_gray"/>
+                                                    <connections>
+                                                        <action selector="tapCheckPriority:" destination="eDH-95-vEw" eventType="touchUpInside" id="rpg-WR-Ung"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -392,12 +404,27 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fWI-8f-Rq1"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="rvD-2C-S27">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="93P-Xx-GQw">
+                            <connections>
+                                <action selector="tapCancel:" destination="eDH-95-vEw" id="qz4-Xz-BWc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="uhN-A4-712">
+                            <connections>
+                                <action selector="tapSave:" destination="eDH-95-vEw" id="DCg-Ld-0E5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="8a5-Uq-1fc" id="aRj-ID-tl7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osB-Xk-1TU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2577" y="472"/>
         </scene>
-        <!--Category List Controller-->
+        <!--Title-->
         <scene sceneID="W5s-I3-wx5">
             <objects>
                 <viewController id="QX2-Sg-DzB" customClass="CategoryListController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
@@ -429,6 +456,9 @@
                                                         <constraint firstAttribute="height" constant="25" id="PgZ-Vk-an2"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="check_gray"/>
+                                                    <connections>
+                                                        <action selector="tapCheckCategory:" destination="QX2-Sg-DzB" eventType="touchUpInside" id="EvW-rD-iRK"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -460,6 +490,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dzk-M6-cRn"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="lWo-Et-EFa">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="I7z-Ud-MUN">
+                            <connections>
+                                <action selector="tapCancel:" destination="QX2-Sg-DzB" id="2qf-4J-sS3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ygt-RQ-YsQ">
+                            <connections>
+                                <action selector="tapSave:" destination="QX2-Sg-DzB" id="amk-Qt-8rz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="XJ5-aa-FGv" id="93Y-H0-ta9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bye-1u-gJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

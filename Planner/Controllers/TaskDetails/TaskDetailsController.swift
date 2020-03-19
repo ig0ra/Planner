@@ -8,17 +8,27 @@
 
 import UIKit
 
-class TaskDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class TaskDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionResultDelegate {
+    @IBOutlet weak var tableView: UITableView!
     
     
-    var task:Task! //task for editing
     
+    var task:Task! //task for editing or creating the new one
+    
+    
+//    fields for tasks
     var taskName:String?
     var taskInfo:String?
     var taskPriority:Priority?
     var taskCategory:Category?
     var taskDeadline:Date?
+    
+//    mark section who contains a certain data type
+    let taskNameSection = 0
+    let taskCategorySection = 1
+    let taskPrioritySection = 2
+    let taskDeadlineSection = 3
+    let taskInfoSection = 4
     
     let dateFormatter = DateFormatter()
     
@@ -54,7 +64,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 4 {
+        if indexPath.section == taskInfoSection {
             return 120
         } else {
             return 45
@@ -67,15 +77,14 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.section { // имя
-        case 0:
+        switch indexPath.section {
+        case taskNameSection:
             
-            // получаем ссылку на ячейку
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTaskName", for: indexPath) as? TaskNameCell else{
                 fatalError("cell type")
             }
             
-            // заполняем компонент данными из задачи
+            // fill component from task
             cell.textTaskName.text = taskName
             
             textTaskName = cell.textTaskName
@@ -83,14 +92,13 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             return cell
             
             
-        case 1: // категория
+        case taskCategorySection: // category
             
-            // получаем ссылку на ячейку
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTaskCategory", for: indexPath) as? TaskCategoryCell else{
                 fatalError("cell type")
             }
             
-            // будет хранить конечный текст для отображения
+            // content text for showing
             var value:String
             
             if let name = taskCategory?.name{
@@ -99,16 +107,14 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 value = "Not selected"
             }
             
-            // заполняем компонент данными из задачи
             cell.labelTaskCategory.text = value
             
             
             return cell
             
             
-        case 2: // приоритет
+        case taskPrioritySection: // priority
             
-            // получаем ссылку на ячейку
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTaskPriority", for: indexPath) as? TaskPriorityCell else{
                 fatalError("cell type")
             }
@@ -122,15 +128,13 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 value = "Not selected"
             }
             
-            // заполняем компонент данными из задачи
             cell.labelTaskPriority.text = value
             
             
             return cell
             
-        case 3: // дата
+        case taskDeadlineSection: // date
             
-            // получаем ссылку на ячейку
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTaskDeadline", for: indexPath) as? TaskDeadlineCell else{
                 fatalError("cell type")
             }
@@ -143,19 +147,16 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 value = "Not specified"
             }
             
-            // заполняем компонент данными из задачи
             cell.labelTaskDeadline.text = value
             
             return cell
             
-        case 4: // доп. текстовая информация
+        case taskInfoSection: // description
             
-            // получаем ссылку на ячейку
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTaskInfo", for: indexPath) as? TaskInfoCell else{
                 fatalError("cell type")
             }
             
-            // заполняем компонент данными из задачи
             cell.textTaskInfo.text = taskInfo
             
             textviewTaskInfo = cell.textTaskInfo
@@ -169,15 +170,15 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
+        case taskNameSection:
             return "Task"
-        case 1:
+        case taskCategorySection:
             return "Category"
-        case 2:
+        case taskPrioritySection:
             return "Priority"
-        case 3:
+        case taskDeadlineSection:
             return "Date"
-        case 4:
+        case taskInfoSection:
             return "Description"
         default:
             return ""
@@ -186,7 +187,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
 
 
     
-    //    Mark: IBActions
+    //    MARK: IBActions
     
 //    close controller without saving
     @IBAction func tapCancel(_ sender: UIBarButtonItem) {
@@ -195,6 +196,8 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
         task.name = textTaskName.text
         task.info = textviewTaskInfo.text
+        task.category = taskCategory
+        task.priority = taskPriority
         
         delegate.done(source: self, data: nil)
         
@@ -212,7 +215,12 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     }
     */
     
-    //    Mark: Prepare
+    //    MARK: Prepare
+    
+    @IBAction func taskNameChanged(_ sender: UITextField) {
+        taskName = sender.text
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == nil {
             return
@@ -221,15 +229,33 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         switch segue.identifier {
         case "SelectCategory":
             if let controller = segue.destination as? CategoryListController{
-                controller.selectedCategory = taskCategory
+                controller.selectedItem = taskCategory
+                controller.delegate = self
             }
         case "SelectPriority":
             if let controller = segue.destination as? PriorityListController{
-                controller.selectedPriority = taskPriority
+                controller.selectedItem = taskPriority
+                controller.delegate = self
             }
         
         default:
             return
+        }
+        
+    }
+    
+    //    MARK: ActionResultDelegate
+    
+    func done(source: UIViewController, data: Any?){
+        switch source {
+        case is CategoryListController:
+            taskCategory = data as? Category
+            tableView.reloadRows(at: [IndexPath(row: 0, section: taskCategorySection)], with: .fade)
+        case is PriorityListController:
+            taskPriority = data as? Priority
+            tableView.reloadRows(at: [IndexPath(row: 0, section: taskPrioritySection)], with: .fade)
+        default:
+            print()
         }
         
     }

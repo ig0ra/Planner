@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-//  API for entities
+//  CRUD API for entities
 protocol Crud {
     associatedtype Item: NSManagedObject // add object to DB
     
