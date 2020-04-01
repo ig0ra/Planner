@@ -72,7 +72,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 40
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,6 +86,10 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             // fill component from task
             cell.textTaskName.text = taskName
+            
+            if (cell.textTaskName.text?.isEmpty)!{ 
+                cell.textTaskName.becomeFirstResponder()
+            }
             
             textTaskName = cell.textTaskName
             
@@ -143,8 +147,12 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             if let deadline = taskDeadline{
                 value = dateFormatter.string(from: deadline)
+                cell.labelTaskDeadline.textColor = UIColor.gray
+                cell.buttonClearDeadline.isHidden = false
             }else{
                 value = "Not specified"
+                cell.labelTaskDeadline.textColor = UIColor.lightGray
+                cell.buttonClearDeadline.isHidden = true
             }
             
             cell.labelTaskDeadline.text = value
@@ -157,9 +165,9 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 fatalError("cell type")
             }
             
-            cell.textTaskInfo.text = taskInfo
+            cell.textviewTaskInfo.text = taskInfo
             
-            textviewTaskInfo = cell.textTaskInfo
+            textviewTaskInfo = cell.textviewTaskInfo
             
             return cell
             
@@ -189,17 +197,57 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     //    MARK: IBActions
     
+    @IBAction func tapCompleteTask(_ sender: UIButton) {
+        confirmAction(text: "Do u really wanna complete task?", segueName: "completeFromTaskDetails")
+    }
+    
+    
+    @IBAction func tapDeleteTask(_ sender: UIButton) {
+        confirmAction(text: "Do u really wanna delete task?", segueName: "deleteFromTaskDetails")
+    }
+    
+    func confirmAction(text: String, segueName:String){
+        let dialogMessage = UIAlertController(title: "Confirmation", message: text, preferredStyle: .actionSheet)
+        
+        let ok = UIAlertAction(title: "OK", style: .default, handler: {
+            (action) -> Void in
+            self.performSegue(withIdentifier: segueName, sender: self)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+        })
+        
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        
+        present(dialogMessage, animated: true, completion: nil)
+    }
+    
+    @IBAction func tapClearDeadline(_ sender: UIButton) {
+        taskDeadline = nil
+        tableView.reloadRows(at: [IndexPath(row: 0, section: taskDeadlineSection)], with: .fade)
+    }
+    
+    
 //    close controller without saving
     @IBAction func tapCancel(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
-        task.name = textTaskName.text
-        task.info = textviewTaskInfo.text
+        
+        if let taskName = taskName, !taskName.isEmpty {
+            task.name = taskName
+        }else{
+            task.name = "New task"
+        }
+        
+        task.name = taskName
+        task.info = taskInfo
         task.category = taskCategory
         task.priority = taskPriority
+        task.deadline = taskDeadline
         
-        delegate.done(source: self, data: nil)
+        delegate.done(source: self, data: task)
         
         navigationController?.popViewController(animated: true)
         
@@ -237,6 +285,11 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 controller.selectedItem = taskPriority
                 controller.delegate = self
             }
+        case "EditTaskInfo":
+            if let controller = segue.destination as? TaskInfoController{
+                controller.taskInfo = taskInfo
+                controller.delegate = self
+            }
         
         default:
             return
@@ -254,10 +307,16 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         case is PriorityListController:
             taskPriority = data as? Priority
             tableView.reloadRows(at: [IndexPath(row: 0, section: taskPrioritySection)], with: .fade)
+        case is TaskInfoController:
+            taskInfo = data as? String
+//            // tableView.reloadRows(at: [IndexPath(row: 0, section: taskInfoSection)], with: .fade)
+            textviewTaskInfo.text = taskInfo
         default:
             print()
         }
         
     }
+    
+
 
 }

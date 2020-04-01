@@ -1,19 +1,21 @@
 //
-//  TaskDeadlineCell.swift
+//  QuickTaskCell.swift
 //  Planner
 //
-//  Created by Igor O on 13.03.20.
+//  Created by Igor O on 23.03.20.
 //  Copyright © 2020 Igor O. All rights reserved.
 //
 
 import UIKit
 
-class TaskDeadlineCell: UITableViewCell {
-    @IBOutlet weak var labelTaskDeadline: UILabel!
-    @IBOutlet weak var buttonClearDeadline: AreaTapButton!
+class QuickTaskCell: UITableViewCell, UITextFieldDelegate {
+    @IBOutlet weak var textQuickTask: UITextField!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        textQuickTask.delegate = self
         // Initialization code
     }
 
@@ -21,6 +23,11 @@ class TaskDeadlineCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textQuickTask.resignFirstResponder()
+        return true
     }
 
 }

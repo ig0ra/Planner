@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DictionaryController<T:Crud>: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
     var dictTableView: UITableView!
     
@@ -20,11 +20,21 @@ class DictionaryController<T:Crud>: UIViewController, UITableViewDelegate, UITab
     var selectedItem:T.Item!
     
     var delegate:ActionResultDelegate!
+    
+    var searchController:UISearchController!
+    
+    var searchBarText:String!
+    
+    var searchBar:UISearchBar{
+        return searchController.searchBar
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        setupSearchController()
+        
+        searchBar.searchBarStyle = .prominent
     }
     
     //    MARK: tableView
@@ -72,14 +82,62 @@ class DictionaryController<T:Crud>: UIViewController, UITableViewDelegate, UITab
         delegate?.done(source: self, data: selectedItem)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //  MARK: search
+    
+    func setupSearchController(){
+        searchController = UISearchController(searchResultsController: nil)
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        definesPresentationContext = true
+        
+        searchBar.placeholder = "Search"
+        searchBar.backgroundColor = .white
+        
+        searchController.searchResultsUpdater = self
+        searchBar.delegate = self
+        
+        searchBar.showsCancelButton = false
+        searchBar.setShowsCancelButton(false, animated: false)
+        
+        searchBar.searchBarStyle = .minimal
+        
+        searchController.hidesNavigationBarDuringPresentation = true
+        
+        if #available(iOS 11.0, *){
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            dictTableView.tableHeaderView = searchBar
+        }
     }
-    */
+    
+    func searchBarShouldBeingEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.text = searchBarText
+        return true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty{
+            searchBar.placeholder = "Search"
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
+        searchBarText = ""
+        dao.getAll()
+        dictTableView.reloadData()
+        searchBar.placeholder = "Search"
+    }
+    
+    func updateSearchResults(for searchController: UISearchController){
+        if !(searchBar.text?.isEmpty)!{
+            searchBarText = searchBar.text!
+            dao.search(text: searchBarText)
+            dictTableView.reloadData()
+            currentCheckedIndexPath = nil
+            searchBar.placeholder = searchBarText
+        }
+    }
 
 }

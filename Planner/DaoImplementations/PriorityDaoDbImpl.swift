@@ -11,12 +11,12 @@ import UIKit
 import CoreData
 
 //    implementation of DAO for priorities
-class PriorityDaoDbImpl: Crud {
+class PriorityDaoDbImpl: CommonSearchDAO {
     typealias Item = Priority
     
     static let current = PriorityDaoDbImpl()
     private init(){
-        items = getAll()
+//        items = getAll()
     }
     
     var items: [Item]!
@@ -49,5 +49,28 @@ class PriorityDaoDbImpl: Crud {
         save()
     }
     
+    func search(text:String) -> [Item]{
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        var predicate: NSPredicate
+        
+        var params = [Any]()
+        
+        var sql = "name CONTAINS[c] %@"
+        
+        params.append(text)
+        
+        predicate = NSPredicate(format: sql, argumentArray: params)
+        
+        fetchRequest.predicate = predicate
+        
+        do {
+            items = try context.fetch(fetchRequest)
+        } catch {
+            fatalError("fatching failed")
+        }
+        
+        return items
+    }
     
 }

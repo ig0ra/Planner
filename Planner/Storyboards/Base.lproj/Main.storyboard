@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,8 +20,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellQuickTask" id="veB-S9-uch" customClass="QuickTaskCell" customModule="Planner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="veB-S9-uch" id="xgR-CQ-tWt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NW2-zT-oZd">
+                                            <rect key="frame" x="15" y="5" width="350" height="33.5"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="quickTaskAdd:" destination="D4L-5J-6Up" eventType="editingDidEnd" id="Y3x-Dk-OrS"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="NW2-zT-oZd" secondAttribute="trailing" constant="10" id="9DZ-Lr-YXC"/>
+                                        <constraint firstItem="NW2-zT-oZd" firstAttribute="top" secondItem="xgR-CQ-tWt" secondAttribute="top" constant="5" id="CNu-f5-vuT"/>
+                                        <constraint firstAttribute="bottom" secondItem="NW2-zT-oZd" secondAttribute="bottom" constant="5" id="J6f-rd-nrE"/>
+                                        <constraint firstItem="NW2-zT-oZd" firstAttribute="leading" secondItem="xgR-CQ-tWt" secondAttribute="leading" constant="15" id="mph-fq-rni"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textQuickTask" destination="NW2-zT-oZd" id="MMC-ib-RK9"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="testCell" rowHeight="60" id="mpT-a7-zQe" customClass="TaskListCell" customModule="Planner" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mpT-a7-zQe" id="ZTV-1q-yvG">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -67,13 +96,16 @@
                                                 <action selector="buttonTaskInfo:" destination="mpT-a7-zQe" eventType="touchUpInside" id="1R7-Y6-uyE"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4t-xs-XMD" userLabel="buttonCompleate">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4t-xs-XMD" userLabel="buttonCompleate" customClass="AreaTapButton" customModule="Planner" customModuleProvider="target">
                                             <rect key="frame" x="340" y="17.5" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="ZTW-M6-IHO"/>
                                                 <constraint firstAttribute="height" constant="25" id="s7K-GS-Cak"/>
                                             </constraints>
                                             <state key="normal" image="check_gray"/>
+                                            <connections>
+                                                <action selector="tapCompleteTask:" destination="D4L-5J-6Up" eventType="touchUpInside" id="iuW-Y3-71f"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -95,12 +127,12 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="buttonCompleteTask" destination="h4t-xs-XMD" id="xxt-DQ-3Mh"/>
                                     <outlet property="buttonTaskInfo" destination="ElH-3p-fUI" id="CkK-AO-N99"/>
                                     <outlet property="labelDeadline" destination="DBO-q3-jgN" id="lZu-6V-BqK"/>
                                     <outlet property="labelPriority" destination="Nr6-gk-Aa4" id="00B-H0-3wl"/>
                                     <outlet property="labelTaskCategory" destination="TU3-E4-bhk" id="S2p-qz-7SV"/>
                                     <outlet property="labelTaskName" destination="Icr-bP-nXJ" id="jdf-jw-E9A"/>
-                                    <segue destination="zUi-2i-b5j" kind="show" identifier="UpdateTask" id="owK-ZO-KcV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -111,10 +143,15 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="46c-Fz-Wbq">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YFn-Vr-O6a"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="KxT-2h-glv"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="KxT-2h-glv">
+                            <connections>
+                                <action selector="tapCreateTask:" destination="D4L-5J-6Up" id="90c-KQ-hiE"/>
+                                <segue destination="zUi-2i-b5j" kind="show" identifier="CreateTask" id="KYj-wu-Mp4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="Zql-ce-eCW" id="RDr-Ef-4YO"/>
+                        <segue destination="zUi-2i-b5j" kind="show" identifier="UpdateTask" id="7eg-HB-ifk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1y6-dS-SHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -142,9 +179,9 @@
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kQb-L4-Zyu">
                                                     <rect key="frame" x="10" y="5" width="355" height="33.5"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="taskNameChanged:" destination="zUi-2i-b5j" eventType="editingChanged" id="BTx-ws-eyx"/>
                                                     </connections>
@@ -171,7 +208,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xb8-vZ-f6z">
                                                     <rect key="frame" x="10" y="5" width="322" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -197,7 +234,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ku1-CV-jOn">
                                                     <rect key="frame" x="10" y="5" width="322" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -221,20 +258,34 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPQ-3k-FRe">
-                                                    <rect key="frame" x="10" y="5" width="355" height="33.5"/>
+                                                    <rect key="frame" x="10" y="5" width="325" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzN-Ic-qFz" customClass="AreaTapButton" customModule="Planner" customModuleProvider="target">
+                                                    <rect key="frame" x="345" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="6oQ-Ve-tty"/>
+                                                        <constraint firstAttribute="width" constant="20" id="tfM-bv-N9x"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="clear"/>
+                                                    <connections>
+                                                        <action selector="tapClearDeadline:" destination="zUi-2i-b5j" eventType="touchUpInside" id="2Jw-u2-WWo"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="ZPQ-3k-FRe" secondAttribute="trailing" constant="10" id="KeC-nk-1YH"/>
+                                                <constraint firstItem="yzN-Ic-qFz" firstAttribute="centerY" secondItem="IaZ-IZ-7RW" secondAttribute="centerY" id="A2r-e0-WTG"/>
+                                                <constraint firstItem="ZPQ-3k-FRe" firstAttribute="trailing" secondItem="yzN-Ic-qFz" secondAttribute="leading" constant="-10" id="KeC-nk-1YH"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZPQ-3k-FRe" secondAttribute="bottom" constant="5" id="Mgc-pi-nLW"/>
                                                 <constraint firstItem="ZPQ-3k-FRe" firstAttribute="top" secondItem="IaZ-IZ-7RW" secondAttribute="top" constant="5" id="Ur3-mw-Iif"/>
                                                 <constraint firstItem="ZPQ-3k-FRe" firstAttribute="leading" secondItem="IaZ-IZ-7RW" secondAttribute="leading" constant="10" id="XpG-s8-OTC"/>
+                                                <constraint firstAttribute="trailing" secondItem="yzN-Ic-qFz" secondAttribute="trailing" constant="10" id="nDP-1p-h7B"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="buttonClearDeadline" destination="yzN-Ic-qFz" id="8rD-xO-ElD"/>
                                             <outlet property="labelTaskDeadline" destination="ZPQ-3k-FRe" id="pg0-3I-ueZ"/>
                                         </connections>
                                     </tableViewCell>
@@ -245,12 +296,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hpx-3I-LZv">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpx-3I-LZv">
                                                     <rect key="frame" x="10" y="5" width="355" height="109.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <gestureRecognizers/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="Zkw-cD-BbY" appends="YES" id="cHg-qU-15q"/>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                             <constraints>
@@ -261,7 +317,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="textTaskInfo" destination="hpx-3I-LZv" id="byd-db-zHb"/>
+                                            <outlet property="textviewTaskInfo" destination="hpx-3I-LZv" id="qjq-M5-dMa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -275,11 +331,17 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b1-c9-cw6">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
-                                        <state key="normal" title="Button"/>
+                                        <color key="backgroundColor" name="button_delete"/>
+                                        <connections>
+                                            <action selector="tapDeleteTask:" destination="zUi-2i-b5j" eventType="touchUpInside" id="y15-0r-BiE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yab-3k-e5k">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
-                                        <state key="normal" title="Button"/>
+                                        <color key="backgroundColor" name="button_complete"/>
+                                        <connections>
+                                            <action selector="tapCompleteTask:" destination="zUi-2i-b5j" eventType="touchUpInside" id="MzV-dy-BjG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -313,11 +375,19 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Ayg-me-MJm" id="S1P-LA-ATu"/>
+                        <segue destination="xOY-ly-tgD" kind="unwind" unwindAction="deleteFromTaskDetailsWithSegue:" id="yM7-75-IOE"/>
+                        <segue destination="xOY-ly-tgD" kind="unwind" identifier="completeFromTaskDetails" unwindAction="completeFromTaskDetailsWithSegue:" id="aea-gF-jJ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kV9-g2-eq5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xOY-ly-tgD" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="Zkw-cD-BbY">
+                    <connections>
+                        <segue destination="SxJ-q5-u4G" kind="show" identifier="EditTaskInfo" id="gJR-FZ-Krv"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1607" y="134"/>
+            <point key="canvasLocation" x="1700" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="M9i-Gf-Jct">
@@ -336,12 +406,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GPs-Ru-ZMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.59999999999999" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-34" y="134"/>
         </scene>
-        <!--Title-->
+        <!--Priority List Controller-->
         <scene sceneID="gIG-jx-v5O">
             <objects>
-                <viewController id="eDH-95-vEw" customClass="PriorityListController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eDH-95-vEw" userLabel="Priority List Controller" customClass="PriorityListController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1qL-iG-jso">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -363,7 +433,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDU-kA-7J6">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDU-kA-7J6" customClass="AreaTapButton" customModule="Planner" customModuleProvider="target">
                                                     <rect key="frame" x="340" y="9.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="E2X-fX-P1C"/>
@@ -422,12 +492,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osB-Xk-1TU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2577" y="472"/>
+            <point key="canvasLocation" x="2585" y="538"/>
         </scene>
-        <!--Title-->
+        <!--Category List Controller-->
         <scene sceneID="W5s-I3-wx5">
             <objects>
-                <viewController id="QX2-Sg-DzB" customClass="CategoryListController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QX2-Sg-DzB" userLabel="Category List Controller" customClass="CategoryListController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ds3-9M-LiH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -449,7 +519,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nY4-mA-qOX">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nY4-mA-qOX" customClass="AreaTapButton" customModule="Planner" customModuleProvider="target">
                                                     <rect key="frame" x="340" y="9.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="35w-XE-M9E"/>
@@ -508,11 +578,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bye-1u-gJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2577" y="-218"/>
+            <point key="canvasLocation" x="3348" y="134"/>
+        </scene>
+        <!--Edit Task Info-->
+        <scene sceneID="lis-So-6Jd">
+            <objects>
+                <viewController id="SxJ-q5-u4G" userLabel="Edit Task Info" customClass="TaskInfoController" customModule="Planner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gea-pe-42e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E4V-dT-ZtG">
+                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="E4V-dT-ZtG" firstAttribute="top" secondItem="NvW-bs-oty" secondAttribute="top" id="PiB-6T-zrA"/>
+                            <constraint firstItem="NvW-bs-oty" firstAttribute="bottom" secondItem="E4V-dT-ZtG" secondAttribute="bottom" id="bJe-B5-VgY"/>
+                            <constraint firstItem="E4V-dT-ZtG" firstAttribute="leading" secondItem="NvW-bs-oty" secondAttribute="leading" id="mUd-QT-UbM"/>
+                            <constraint firstItem="NvW-bs-oty" firstAttribute="trailing" secondItem="E4V-dT-ZtG" secondAttribute="trailing" id="xr7-4o-aHm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NvW-bs-oty"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="yQ3-M9-FvO">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4aQ-ah-ZRf">
+                            <connections>
+                                <action selector="tapCancel:" destination="SxJ-q5-u4G" id="Kag-Kh-VIg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="FFX-xw-eWe">
+                            <connections>
+                                <action selector="tapSave:" destination="SxJ-q5-u4G" id="gnw-4z-V5X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textviewTaskInfo" destination="E4V-dT-ZtG" id="Uin-tO-dEv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hsB-JP-ajO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2586" y="-233"/>
         </scene>
     </scenes>
     <resources>
         <image name="check_gray" width="30" height="30"/>
+        <image name="clear" width="15" height="15"/>
         <image name="note" width="25" height="29"/>
+        <namedColor name="button_complete">
+            <color red="0.29019607843137257" green="0.83529411764705885" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="button_delete">
+            <color red="1" green="0.37647058823529411" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="KYj-wu-Mp4"/>
+    </inferredMetricsTieBreakers>
 </document>

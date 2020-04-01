@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 //    implementation of DAO for tasks
-class TaskDaoDbImpl: Crud {
+class TaskDaoDbImpl: CommonSearchDAO {
     typealias Item = Task
     
     let categoryDao = CategoryDaoDbImpl.current
@@ -20,7 +20,7 @@ class TaskDaoDbImpl: Crud {
     
     static let current = TaskDaoDbImpl()
     private init(){
-        
+        getAll()
     }
     
     var items: [Item]!
@@ -51,6 +51,30 @@ class TaskDaoDbImpl: Crud {
         }
         
         save()
+    }
+    
+    func search(text:String) -> [Item]{
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        var predicate: NSPredicate
+        
+        var params = [Any]()
+        
+        var sql = "name CONTAINS[c] %@"
+        
+        params.append(text)
+        
+        predicate = NSPredicate(format: sql, argumentArray: params)
+        
+        fetchRequest.predicate = predicate
+        
+        do {
+            items = try context.fetch(fetchRequest)
+        } catch {
+            fatalError("fatching failed")
+        }
+        
+        return items
     }
     
     

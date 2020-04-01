@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		982208C92429193900E1F9F4 /* QuickTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982208C82429193900E1F9F4 /* QuickTaskCell.swift */; };
 		984642662416A78500DA7637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984642652416A78500DA7637 /* AppDelegate.swift */; };
 		9846426B2416A78500DA7637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984642692416A78500DA7637 /* Main.storyboard */; };
 		9846426E2416A78500DA7637 /* Planner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9846426C2416A78500DA7637 /* Planner.xcdatamodeld */; };
@@ -19,11 +20,14 @@
 		985E5E21241C192500DDFC32 /* TaskDeadlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E5E20241C192500DDFC32 /* TaskDeadlineCell.swift */; };
 		985E5E23241C195800DDFC32 /* TaskInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E5E22241C195800DDFC32 /* TaskInfoCell.swift */; };
 		9868EA3E2423C79300E52910 /* DictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868EA3D2423C79300E52910 /* DictionaryController.swift */; };
+		9875B0152424F741008826D7 /* AreaTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875B0142424F741008826D7 /* AreaTapButton.swift */; };
+		9875B0172425282E008826D7 /* TaskInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875B0162425282E008826D7 /* TaskInfoController.swift */; };
 		988C2A80241D8206005F7223 /* ActionResultDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988C2A7F241D8206005F7223 /* ActionResultDelegate.swift */; };
 		988F63572419255400A20F4E /* TaskListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984642802416BE7F00DA7637 /* TaskListController.swift */; };
 		989160802422578700AD572C /* PriorityListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9891607F2422578700AD572C /* PriorityListController.swift */; };
 		989160822422583F00AD572C /* PriorityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989160812422583F00AD572C /* PriorityListCell.swift */; };
 		9891608424225D2E00AD572C /* CategoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9891608324225D2E00AD572C /* CategoryListCell.swift */; };
+		989275B1242E46F90084BB04 /* CommonSearchDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989275B0242E46F90084BB04 /* CommonSearchDAO.swift */; };
 		9897DCC424213AF1009108E9 /* CategoryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9897DCC324213AF1009108E9 /* CategoryListController.swift */; };
 		98BA8579241A816900DF3367 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA8578241A816900DF3367 /* DateExtension.swift */; };
 		98BA857B241A818800DF3367 /* TaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BA857A241A818800DF3367 /* TaskExtension.swift */; };
@@ -36,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		982208C82429193900E1F9F4 /* QuickTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTaskCell.swift; sourceTree = "<group>"; };
 		984642622416A78500DA7637 /* Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		984642652416A78500DA7637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9846426A2416A78500DA7637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -44,17 +49,20 @@
 		984642722416A78600DA7637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		984642742416A78600DA7637 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		984642802416BE7F00DA7637 /* TaskListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListController.swift; sourceTree = "<group>"; };
-		985E5E18241BF3EA00DDFC32 /* TaskDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsController.swift; sourceTree = "<group>"; };
+		985E5E18241BF3EA00DDFC32 /* TaskDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		985E5E1A241C15CF00DDFC32 /* TaskNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNameCell.swift; sourceTree = "<group>"; };
 		985E5E1C241C167900DDFC32 /* TaskCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategoryCell.swift; sourceTree = "<group>"; };
 		985E5E1E241C18E100DDFC32 /* TaskPriorityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPriorityCell.swift; sourceTree = "<group>"; };
 		985E5E20241C192500DDFC32 /* TaskDeadlineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDeadlineCell.swift; sourceTree = "<group>"; };
 		985E5E22241C195800DDFC32 /* TaskInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoCell.swift; sourceTree = "<group>"; };
 		9868EA3D2423C79300E52910 /* DictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryController.swift; sourceTree = "<group>"; };
+		9875B0142424F741008826D7 /* AreaTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTapButton.swift; sourceTree = "<group>"; };
+		9875B0162425282E008826D7 /* TaskInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoController.swift; sourceTree = "<group>"; };
 		988C2A7F241D8206005F7223 /* ActionResultDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionResultDelegate.swift; sourceTree = "<group>"; };
 		9891607F2422578700AD572C /* PriorityListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListController.swift; sourceTree = "<group>"; };
 		989160812422583F00AD572C /* PriorityListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListCell.swift; sourceTree = "<group>"; };
 		9891608324225D2E00AD572C /* CategoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCell.swift; sourceTree = "<group>"; };
+		989275B0242E46F90084BB04 /* CommonSearchDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchDAO.swift; sourceTree = "<group>"; };
 		9897DCC324213AF1009108E9 /* CategoryListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListController.swift; sourceTree = "<group>"; };
 		98BA8578241A816900DF3367 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		98BA857A241A818800DF3367 /* TaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtension.swift; sourceTree = "<group>"; };
@@ -96,6 +104,7 @@
 		984642642416A78500DA7637 /* Planner */ = {
 			isa = PBXGroup;
 			children = (
+				9875B0132424F440008826D7 /* UIViews */,
 				988C2A7E241D7D88005F7223 /* Delegates */,
 				98BA8581241A81E500DF3367 /* DaoImplementations */,
 				98BA857E241A81CC00DF3367 /* DAO */,
@@ -132,12 +141,20 @@
 		9846427D2416BDEA00DA7637 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				9868EA3D2423C79300E52910 /* DictionaryController.swift */,
 				984642802416BE7F00DA7637 /* TaskListController.swift */,
 				9897DCC324213AF1009108E9 /* CategoryListController.swift */,
 				9891607F2422578700AD572C /* PriorityListController.swift */,
+				9868EA3D2423C79300E52910 /* DictionaryController.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		9875B0132424F440008826D7 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				9875B0142424F741008826D7 /* AreaTapButton.swift */,
+			);
+			path = UIViews;
 			sourceTree = "<group>";
 		};
 		988C2A7C241D6FC5005F7223 /* List */ = {
@@ -146,6 +163,7 @@
 				98EF40BC2417DBFA0007420B /* TaskListCell.swift */,
 				989160812422583F00AD572C /* PriorityListCell.swift */,
 				9891608324225D2E00AD572C /* CategoryListCell.swift */,
+				982208C82429193900E1F9F4 /* QuickTaskCell.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -174,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				985E5E18241BF3EA00DDFC32 /* TaskDetailsController.swift */,
+				9875B0162425282E008826D7 /* TaskInfoController.swift */,
 			);
 			path = TaskDetails;
 			sourceTree = "<group>";
@@ -192,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				98BA857F241A81DF00DF3367 /* Crud.swift */,
+				989275B0242E46F90084BB04 /* CommonSearchDAO.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -286,16 +306,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9875B0152424F741008826D7 /* AreaTapButton.swift in Sources */,
+				9875B0172425282E008826D7 /* TaskInfoController.swift in Sources */,
 				98BA8587241AA1E300DF3367 /* CategoryDaoDbImpl.swift in Sources */,
 				988C2A80241D8206005F7223 /* ActionResultDelegate.swift in Sources */,
 				98BA857B241A818800DF3367 /* TaskExtension.swift in Sources */,
 				98EF40BD2417DBFA0007420B /* TaskListCell.swift in Sources */,
+				982208C92429193900E1F9F4 /* QuickTaskCell.swift in Sources */,
 				985E5E1B241C15CF00DDFC32 /* TaskNameCell.swift in Sources */,
 				9891608424225D2E00AD572C /* CategoryListCell.swift in Sources */,
 				98BA8579241A816900DF3367 /* DateExtension.swift in Sources */,
 				9868EA3E2423C79300E52910 /* DictionaryController.swift in Sources */,
 				98BA8580241A81DF00DF3367 /* Crud.swift in Sources */,
 				989160822422583F00AD572C /* PriorityListCell.swift in Sources */,
+				989275B1242E46F90084BB04 /* CommonSearchDAO.swift in Sources */,
 				9897DCC424213AF1009108E9 /* CategoryListController.swift in Sources */,
 				98BA857D241A819D00DF3367 /* CrudExtension.swift in Sources */,
 				984642662416A78500DA7637 /* AppDelegate.swift in Sources */,

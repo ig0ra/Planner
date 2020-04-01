@@ -15,6 +15,9 @@ class PriorityListController: DictionaryController<PriorityDaoDbImpl> {
         super.viewDidLoad()
         dictTableView = tableView
         dao = PriorityDaoDbImpl.current
+        dao.getAll()
+        
+        dictTableView = tableView
         
         // Do any additional setup after loading the view.
     }
